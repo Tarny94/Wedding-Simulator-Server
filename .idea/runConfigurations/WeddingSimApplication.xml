@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="WeddingSimApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="Wedding-Simulator-Server" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="WeddingSimApplication.java" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
