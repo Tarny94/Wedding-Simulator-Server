@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RestController
 @RequestMapping("guests")
 public class WeddingGuestsController {
@@ -22,6 +22,16 @@ public class WeddingGuestsController {
     @PostMapping
     public Guest createGuest(@RequestBody Guest guest) {
         return guestService.createGuestService(guest);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Guest> updateGuest(@PathVariable String id, @RequestBody Guest updatedGuest) {
+        return this.guestService.updateGuestService(id, updatedGuest);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteGuest(@PathVariable String id) {
+        return this.guestService.deleteGuest(id);
     }
 
     @GetMapping
