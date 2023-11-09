@@ -16,8 +16,13 @@ import java.util.Optional;
 @RequestMapping("guests")
 public class WeddingGuestsController {
 
+
+    private final GuestService guestService;
+
     @Autowired
-    private GuestService guestService;
+    public WeddingGuestsController(final GuestService guestService) {
+        this.guestService = guestService;
+    }
 
     @PostMapping
     public Guest createGuest(@RequestBody Guest guest) {
