@@ -33,8 +33,7 @@ public class WeddingCostCalculation {
 
     private int suppliesConfirmed;
 
-    private double suppliesPayed;
+    private int suppliesPayed;
 
     private int totalSupplies;
-
 }

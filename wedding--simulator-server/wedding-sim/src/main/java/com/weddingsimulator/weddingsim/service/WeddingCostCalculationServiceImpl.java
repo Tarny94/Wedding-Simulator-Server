@@ -31,9 +31,15 @@ public class WeddingCostCalculationServiceImpl implements WeddingCostCalculation
 
     private int suppliesConfirmed = 0;
 
-    private double suppliesPayed = 0;
+    private int suppliesPayed = 0;
 
     private int totalSupplies = 0;
+
+    private double remainingToBePay = 0;
+
+    private double resultIncomeTotalGuests = 0;
+
+    private double resultIncomeConfirmedGuests = 0;
 
     @Autowired
     public WeddingCostCalculationServiceImpl(SupplyRepository supplyRepository, WeddingCostRepository weddingCostRepository, GuestCalculationRepository guestCalculationRepository) {
@@ -66,14 +72,14 @@ public class WeddingCostCalculationServiceImpl implements WeddingCostCalculation
                 this.suppliesPayed++;
             }
         }
-        double remainingToBePay = this.totalWeddingCost - this.totalPayed;
+        this.remainingToBePay = this.totalWeddingCost - this.totalPayed;
 
         if(guestsCalculation.isPresent()) {
-            this.incomeTotalGuests = guestsCalculation.get().getTotalIncome();
-            this.incomeConfirmedGuests = guestsCalculation.get().getConfirmedIncome();
+            this.incomeTotalGuests = (int) guestsCalculation.get().getTotalIncome();
+            this.incomeConfirmedGuests = (int) guestsCalculation.get().getConfirmedIncome();
         }
-        double resultIncomeTotalGuests = this.incomeTotalGuests - this.totalWeddingCost;
-        double resultIncomeConfirmedGuests = this.incomeConfirmedGuests - this.totalWeddingCost;
+        this.resultIncomeTotalGuests = this.incomeTotalGuests - this.totalWeddingCost;
+        this.resultIncomeConfirmedGuests = this.incomeConfirmedGuests - this.totalWeddingCost;
 
         weddingCostCalculation.setIncomeTotalGuests(this.incomeTotalGuests);
         weddingCostCalculation.setIncomeConfirmedGuests(this.incomeConfirmedGuests);
@@ -87,6 +93,19 @@ public class WeddingCostCalculationServiceImpl implements WeddingCostCalculation
         weddingCostCalculation.setRemainToBePay(remainingToBePay);
 
         this.weddingCostRepository.save(weddingCostCalculation);
+        this.resetVariables();
     }
 
+    private void resetVariables() {
+        incomeTotalGuests = 0;
+        incomeConfirmedGuests = 0;
+        totalWeddingCost = 0;
+        totalPayed = 0;
+        suppliesConfirmed = 0;
+        suppliesPayed = 0;
+        totalSupplies = 0;
+        remainingToBePay = 0;
+        resultIncomeTotalGuests = 0;
+        resultIncomeConfirmedGuests = 0;
+    }
 }
