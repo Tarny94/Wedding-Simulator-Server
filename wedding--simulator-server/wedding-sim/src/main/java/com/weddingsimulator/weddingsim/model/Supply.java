@@ -8,25 +8,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Getter
 @Setter
-@Document(collection = "guests")
-public class Guest {
+@Document(collection = "supplies")
+public class Supply {
     @Id
     private String id;
 
     @NonNull
-    private String familyName ;
+    private String supply;
 
-    private int adult;
+    private double price;
 
-    private int children;
+    private int unit;
 
-    private boolean confirmed;
+    private double totalPrice;
 
-    @NonNull
-    private String invited;
+    private double payed;
 
-    @NonNull
-    private String zone;
+    private Boolean confirmed;
 
-    private int estimate;
+    private String observation;
+
 }
